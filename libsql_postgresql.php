@@ -1,6 +1,6 @@
 <?php
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-// 0.2.2
+// 0.2.3
 // Alexey Potehin <gnuplanet@gmail.com>, http://www.gnuplanet.ru/doc/cv
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 class sql_t
@@ -37,6 +37,7 @@ function libsql__var2json_list($item_list, $flag_skip_null = true)
 function libsql__var2time($item)
 function drop_sql_injection($str)
 function libsql__bytea2var($table_name_short, $col_name, $flag_make_col_alias = true)
+function libsql__uuid2var($table_name_short, $col_name, $flag_make_col_alias = true)
 function libsql__text2var($table_name_short, $col_name, $flag_make_col_alias = true)
 function libsql__json2var($table_name_short, $col_name, $flag_make_col_alias = true)
 function libsql__bigint2var($table_name_short, $col_name, $flag_make_col_alias = true)
@@ -379,6 +380,16 @@ function libsql__bytea2var($table_name_short, $col_name, $flag_make_col_alias = 
 	}
 
 	return "encode(".$table_name_short.".".$col_name.", 'hex')::text AS ".$col_name;
+}
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+function libsql__uuid2var($table_name_short, $col_name, $flag_make_col_alias = true)
+{
+	if ($flag_make_col_alias === false)
+	{
+		return $table_name_short.".".$col_name;
+	}
+
+	return $table_name_short.".".$col_name." AS ".$col_name;
 }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 function libsql__text2var($table_name_short, $col_name, $flag_make_col_alias = true)
