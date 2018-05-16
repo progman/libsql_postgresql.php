@@ -1,0 +1,20 @@
+=> CREATE TABLE test_json(a jsonb, b jsonb[]);
+CREATE TABLE
+
+=> INSERT INTO test_json (a, b) VALUES ('{ "a" : 0 }'::jsonb, ARRAY[ '{ "a" : 1 }'::jsonb, '{ "a" : 2 }'::jsonb ]::jsonb[]);
+INSERT 0 1
+
+=> SELECT a, b FROM test_json;
+    a     |              b              
+----------+-----------------------------
+ {"a": 0} | {"{\"a\": 1}","{\"a\": 2}"}
+(1 строка)
+
+=> SELECT TO_JSON(a)::json AS a, TO_JSON(b)::json AS b FROM test_json;
+    a     |          b          
+----------+---------------------
+ {"a": 0} | [{"a": 1},{"a": 2}]
+(1 строка)
+
+=> DROP TABLE test_json;
+DROP TABLE

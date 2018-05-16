@@ -69,3 +69,27 @@ BEGIN
 END
 $$;
 -- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
+DROP FUNCTION IF EXISTS timestamp_list2json(timestamp_list timestamp[]);
+CREATE OR REPLACE FUNCTION timestamp_list2json(timestamp_list timestamp[])
+RETURNS json
+LANGUAGE plpgsql AS $$
+DECLARE
+    item timestamp;
+    i bigint;
+    size bigint;
+    tmp bigint[];
+BEGIN
+    i := 1;
+    size := array_length(timestamp_list, 1) + 1;
+
+    WHILE i < size
+    LOOP
+        item = timestamp_list[i];
+        tmp = array_append(tmp, UTC_TO_UNIXMICROTIME(item)::bigint);
+        i = i + 1;
+    END LOOP;
+
+    RETURN to_json(tmp);
+END
+$$;
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --

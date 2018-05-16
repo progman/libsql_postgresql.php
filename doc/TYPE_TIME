@@ -1,0 +1,20 @@
+=> CREATE TABLE test_time(a timestamp, b timestamp[]);
+CREATE TABLE
+
+=> INSERT INTO test_time (a, b) VALUES (UNIXMICROTIME_TO_UTC('0'::bigint)::timestamp, ARRAY[ UNIXMICROTIME_TO_UTC('1'::bigint)::timestamp, UNIXMICROTIME_TO_UTC('2'::bigint)::timestamp ]::timestamp[]);
+INSERT 0 1
+
+=> SELECT a, b FROM test_time;
+          a          |                              b                              
+---------------------+-------------------------------------------------------------
+ 1970-01-01 00:00:00 | {"1970-01-01 00:00:00.000001","1970-01-01 00:00:00.000002"}
+(1 строка)
+
+=> SELECT UTC_TO_UNIXMICROTIME(a)::bigint AS a, TIMESTAMP_LIST2JSON(b)::json AS b FROM test_time;
+ a |   b   
+---+-------
+ 0 | [1,2]
+(1 строка)
+
+=> DROP TABLE test_time;
+DROP TABLE
