@@ -1,0 +1,20 @@
+=> CREATE TABLE test_bigint(a text, b text[]);
+CREATE TABLE
+
+=> INSERT INTO test_bigint (a, b) VALUES (0, ARRAY[1::bigint, 2::bigint]::bigint[]);
+INSERT 0 1
+
+=> SELECT a, b FROM test_bigint;
+ a |   b   
+---+-------
+ 0 | {1,2}
+(1 строка)
+
+=> SELECT a::bigint AS a, TO_JSON(b)::json AS b FROM test_bigint;
+ a |     b     
+---+-----------
+ 0 | ["1","2"]
+(1 строка)
+
+=> DROP TABLE test_bigint;
+DROP TABLE

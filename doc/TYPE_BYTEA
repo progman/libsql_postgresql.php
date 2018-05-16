@@ -1,0 +1,20 @@
+=> CREATE TABLE test_bytea(a bytea, b bytea[]);
+CREATE TABLE
+
+=> INSERT INTO test_bytea (a, b) VALUES ('\x00'::bytea, ARRAY['\x01'::bytea, '\x02'::bytea]::bytea[]);
+INSERT 0 1
+
+=> SELECT a, b FROM test_bytea;
+  a   |         b         
+------+-------------------
+ \x00 | {"\\x01","\\x02"}
+(1 строка)
+
+=> SELECT ENCODE(a, 'hex')::text AS a, BYTEA_LIST2JSON(b)::json AS b FROM test_bytea;
+ a  |      b      
+----+-------------
+ 00 | ["01","02"]
+(1 строка)
+
+=> DROP TABLE test_bytea;
+DROP TABLE
