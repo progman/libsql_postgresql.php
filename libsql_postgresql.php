@@ -1,6 +1,6 @@
 <?php
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-// 0.2.5
+// 0.2.6
 // Alexey Potehin <gnuplanet@gmail.com>, http://www.gnuplanet.ru/doc/cv
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 class sql_t
@@ -19,44 +19,6 @@ class sql_t
 		$this->sql_str = $sql_str;
 	}
 }
-//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-/*
-function libsql__var2inner_text($item)
-function libsql__var2text($item)
-function libsql__var2text_list($item_list, $flag_skip_null = true)
-function libsql__var2bytea($item)
-function libsql__var2bytea_list($item_list, $flag_skip_null = true)
-function libsql__var2uuid($item)
-function libsql__var2uuid_list($item_list, $flag_skip_null = true)
-function libsql__var2bigint($item)
-function libsql__var2bigint_list($item_list, $flag_skip_null = true)
-function libsql__var2bool($item)
-function libsql__var2bool_list($item_list, $flag_skip_null = true)
-function libsql__var2json($item)
-function libsql__var2json_list($item_list, $flag_skip_null = true)
-function libsql__var2time($item)
-function drop_sql_injection($str)
-function libsql__bytea2var($table_name_short, $col_name, $flag_make_col_alias = true)
-function libsql__uuid2var($table_name_short, $col_name, $flag_make_col_alias = true)
-function libsql__text2var($table_name_short, $col_name, $flag_make_col_alias = true)
-function libsql__json2var($table_name_short, $col_name, $flag_make_col_alias = true)
-function libsql__bigint2var($table_name_short, $col_name, $flag_make_col_alias = true)
-function libsql__flag2var($table_name_short, $col_name, $flag_make_col_alias = true)
-function libsql__time2var($table_name_short, $col_name, $flag_make_col_alias = true)
-function libsql__error($sql_handle)
-function libsql__num_rows($sql_result)
-function libsql__query($sql_handle, $sql_tag, $sql_str, $rc_target)
-function libsql__query_free($sql_result)
-function libsql__query_view()
-function libsql__database_open($host, $port, $database, $login, $password)
-function libsql__database_close($sql_handle)
-function libsql__transaction_begin($sql_handle, $flag_serializable = false)
-function libsql__transaction_rollback($sql_handle)
-function libsql__transaction_commit($sql_handle)
-function libsql__ping($sql_handle)
-function libsql__notify_wait($sql_handle, $timewait = 30, $timeout = 100000)
-function libsql__get_notify($sql_handle)
-*/
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 function libsql__var2inner_text($item)
 {
@@ -442,7 +404,7 @@ function libsql__json2var($table_name_short, $col_name, $flag_make_col_alias = t
 	return $table_name_short.".".$col_name."::json AS ".$col_name;
 }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-// TODO libsql__json_list2var
+// TODO function libsql__json_list2var
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 function libsql__bigint2var($table_name_short, $col_name, $flag_make_col_alias = true)
 {
@@ -454,7 +416,7 @@ function libsql__bigint2var($table_name_short, $col_name, $flag_make_col_alias =
 	return $table_name_short.".".$col_name."::bigint AS ".$col_name;
 }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-// TODO libsql__bigint_list2var
+// TODO function libsql__bigint_list2var
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 function libsql__flag2var($table_name_short, $col_name, $flag_make_col_alias = true)
 {
@@ -466,7 +428,7 @@ function libsql__flag2var($table_name_short, $col_name, $flag_make_col_alias = t
 	return $table_name_short.".".$col_name."::int AS ".$col_name;
 }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-// TODO libsql__flag_list2var
+// TODO function libsql__flag_list2var
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 function libsql__time2var($table_name_short, $col_name, $flag_make_col_alias = true)
 {
@@ -478,8 +440,7 @@ function libsql__time2var($table_name_short, $col_name, $flag_make_col_alias = t
 	return "UTC_TO_UNIXMICROTIME(".$table_name_short.".".$col_name.")::bigint AS ".$col_name;
 }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-// TODO libsql__time_list2var
-//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+// TODO function libsql__time_list2var
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 function libsql__error($sql_handle)
 {
