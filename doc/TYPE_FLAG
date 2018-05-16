@@ -1,0 +1,20 @@
+=> CREATE TABLE test_flag(a boolean, b boolean[]);
+CREATE TABLE
+
+=> INSERT INTO test_flag (a, b) VALUES ('0'::boolean, ARRAY[ '0'::boolean, '1'::boolean ]::boolean[]);
+INSERT 0 1
+
+=> SELECT a, b from test_flag;
+ a |   b   
+---+-------
+ f | {f,t}
+(1 строка)
+
+=> SELECT a::int AS a, FLAG_LIST2JSON(b)::json AS b from test_flag;
+ a |   b   
+---+-------
+ 0 | [0,1]
+(1 строка)
+
+=> DROP TABLE test_flag;
+DROP TABLE

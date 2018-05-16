@@ -93,3 +93,27 @@ BEGIN
 END
 $$;
 -- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
+DROP FUNCTION IF EXISTS flag_list2json(flag_list boolean[]);
+CREATE OR REPLACE FUNCTION flag_list2json(flag_list boolean[])
+RETURNS json
+LANGUAGE plpgsql AS $$
+DECLARE
+    item boolean;
+    i bigint;
+    size bigint;
+    tmp int[];
+BEGIN
+    i := 1;
+    size := array_length(flag_list, 1) + 1;
+
+    WHILE i < size
+    LOOP
+        item = flag_list[i];
+        tmp = array_append(tmp, item::int);
+        i = i + 1;
+    END LOOP;
+
+    RETURN to_json(tmp);
+END
+$$;
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
