@@ -8,11 +8,7 @@ class sql_t
 	var $sql_str;
 
 
-	function sql_t
-	(
-		$sql_tag,
-		$sql_str
-	)
+	function __construct($sql_tag, $sql_str) // work in php5 and php7
 	{
 		$this->sql_tag = $sql_tag;
 		$this->sql_str = $sql_str;
