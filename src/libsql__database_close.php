@@ -3,6 +3,7 @@ function libsql__database_close($sql_handle)
 {
 	$result = new result_t(__FUNCTION__, __FILE__);
 
+	if ($sql_handle === null) return;
 
 	@pg_close($sql_handle);
 }
