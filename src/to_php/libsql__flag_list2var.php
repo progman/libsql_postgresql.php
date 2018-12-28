@@ -3,7 +3,7 @@ function libsql__flag_list2var($table_name_short, $col_name, $flag_make_col_alia
 {
 	if ($flag_make_col_alias === false)
 	{
-		return "TO_JSON(".$table_name_short.".".$col_name.")::json";
+		return "FLAG_LIST2JSON(".$table_name_short.".".$col_name.")::json";
 	}
 
 	return "FLAG_LIST2JSON(".$table_name_short.".".$col_name.")::json AS ".$col_name;
