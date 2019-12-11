@@ -1,6 +1,6 @@
 <?php
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-// 0.3.8
+// 0.3.9
 // Alexey Potehin <gnuplanet@gmail.com>, http://www.gnuplanet.ru/doc/cv
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 // PLEASE DO NOT EDIT !!! THIS FILE IS GENERATED FROM FILES FROM DIR src BY make.sh
@@ -143,29 +143,43 @@ function libsql__get_notify($sql_handle)
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__notify_wait($sql_handle, $timewait = 30, $timeout = 100000)
+/**
+ * wait postgresql notify
+ * \param[in] value hex string
+ * \param[in] flag_force always use it function
+ * \return ok if ok
+ */
+function libsql__notify_wait($sql_handle, $timewait = 60, $timeout = 1000000)
 {
 	$result = new result_t(__FUNCTION__, __FILE__);
 
 
-	if (function_exists("pg_socket") === false) // php < 5.6
+	$rc = function_exists("pg_socket"); // php < 5.6
+	if ($rc === false)
 	{
 		usleep($timeout);
 		return $result;
 	}
 
 
-	$sock = @pg_socket($sql_handle);
-	if ($sock === false)
+	$rc = @pg_socket($sql_handle);
+	if ($rc === false)
 	{
 		usleep($timeout);
 		return $result;
 	}
+	$sock = $rc;
+
 
 	$read   = array($sock);
 	$write  = array();
 	$except = array($sock);
-	stream_select($read, $write, $except, $timewait);
+	$rc = stream_select($read, $write, $except, $timewait);
+	if ($rc === false)
+	{
+		usleep($timeout);
+		return $result;
+	}
 
 
 	$result->set_ok();
