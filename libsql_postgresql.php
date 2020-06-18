@@ -1,6 +1,6 @@
 <?php
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-// 0.3.9
+// 0.4.0
 // Alexey Potehin <gnuplanet@gmail.com>, http://www.gnuplanet.ru/doc/cv
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 // PLEASE DO NOT EDIT !!! THIS FILE IS GENERATED FROM FILES FROM DIR src BY make.sh
@@ -375,179 +375,547 @@ function libsql__transaction_rollback($sql_handle)
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__bigint2var($table_name_short, $col_name, $flag_make_col_alias = true)
+function libsql__bigint2var($table_name_short, $col_name, $col_alias = null, $flag_make_col_alias = true)
 {
+// stupid compatible
+//("table_name_short", "col_name")
+//("table_name_short", "col_name", true)
+//("table_name_short", "col_name", "col_alias")
+//("table_name_short", "col_name", "col_alias", true)
+	for (;;)
+	{
+		if (gettype($col_alias) === "boolean")
+		{
+			$flag_make_col_alias = $col_alias;
+			$col_alias = $col_name;
+			break;
+		}
+
+		if ($col_alias === null)
+		{
+			$col_alias = $col_name;
+			break;
+		}
+
+		break;
+	}
+
 	if ($flag_make_col_alias === false)
 	{
 		return $table_name_short.".".$col_name;
 	}
 
-	return $table_name_short.".".$col_name."::bigint AS ".$col_name;
+	return $table_name_short.".".$col_name."::bigint AS ".$col_alias;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__bigint_list2var($table_name_short, $col_name, $flag_make_col_alias = true)
+function libsql__bigint_list2var($table_name_short, $col_name, $col_alias = null, $flag_make_col_alias = true)
 {
+// stupid compatible
+//("table_name_short", "col_name")
+//("table_name_short", "col_name", true)
+//("table_name_short", "col_name", "col_alias")
+//("table_name_short", "col_name", "col_alias", true)
+	for (;;)
+	{
+		if (gettype($col_alias) === "boolean")
+		{
+			$flag_make_col_alias = $col_alias;
+			$col_alias = $col_name;
+			break;
+		}
+
+		if ($col_alias === null)
+		{
+			$col_alias = $col_name;
+			break;
+		}
+
+		break;
+	}
+
 	if ($flag_make_col_alias === false)
 	{
 		return "TO_JSON(".$table_name_short.".".$col_name.")::json";
 	}
 
-	return "TO_JSON(".$table_name_short.".".$col_name.")::json AS ".$col_name;
+	return "TO_JSON(".$table_name_short.".".$col_name.")::json AS ".$col_alias;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__bytea2var($table_name_short, $col_name, $flag_make_col_alias = true)
+function libsql__bytea2var($table_name_short, $col_name, $col_alias = null, $flag_make_col_alias = true)
 {
+// stupid compatible
+//("table_name_short", "col_name")
+//("table_name_short", "col_name", true)
+//("table_name_short", "col_name", "col_alias")
+//("table_name_short", "col_name", "col_alias", true)
+	for (;;)
+	{
+		if (gettype($col_alias) === "boolean")
+		{
+			$flag_make_col_alias = $col_alias;
+			$col_alias = $col_name;
+			break;
+		}
+
+		if ($col_alias === null)
+		{
+			$col_alias = $col_name;
+			break;
+		}
+
+		break;
+	}
+
 	if ($flag_make_col_alias === false)
 	{
 		return "ENCODE(".$table_name_short.".".$col_name.", 'hex')::text";
 	}
 
-	return "ENCODE(".$table_name_short.".".$col_name.", 'hex')::text AS ".$col_name;
+	return "ENCODE(".$table_name_short.".".$col_name.", 'hex')::text AS ".$col_alias;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__bytea_list2var($table_name_short, $col_name, $flag_make_col_alias = true)
+function libsql__bytea_list2var($table_name_short, $col_name, $col_alias = null, $flag_make_col_alias = true)
 {
+// stupid compatible
+//("table_name_short", "col_name")
+//("table_name_short", "col_name", true)
+//("table_name_short", "col_name", "col_alias")
+//("table_name_short", "col_name", "col_alias", true)
+	for (;;)
+	{
+		if (gettype($col_alias) === "boolean")
+		{
+			$flag_make_col_alias = $col_alias;
+			$col_alias = $col_name;
+			break;
+		}
+
+		if ($col_alias === null)
+		{
+			$col_alias = $col_name;
+			break;
+		}
+
+		break;
+	}
+
 	if ($flag_make_col_alias === false)
 	{
 		return "BYTEA_LIST2JSON(".$table_name_short.".".$col_name.")::json";
 	}
 
-	return "BYTEA_LIST2JSON(".$table_name_short.".".$col_name.")::json AS ".$col_name;
+	return "BYTEA_LIST2JSON(".$table_name_short.".".$col_name.")::json AS ".$col_alias;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__flag2var($table_name_short, $col_name, $flag_make_col_alias = true)
+function libsql__flag2var($table_name_short, $col_name, $col_alias = null, $flag_make_col_alias = true)
 {
+// stupid compatible
+//("table_name_short", "col_name")
+//("table_name_short", "col_name", true)
+//("table_name_short", "col_name", "col_alias")
+//("table_name_short", "col_name", "col_alias", true)
+	for (;;)
+	{
+		if (gettype($col_alias) === "boolean")
+		{
+			$flag_make_col_alias = $col_alias;
+			$col_alias = $col_name;
+			break;
+		}
+
+		if ($col_alias === null)
+		{
+			$col_alias = $col_name;
+			break;
+		}
+
+		break;
+	}
+
 	if ($flag_make_col_alias === false)
 	{
 		return $table_name_short.".".$col_name."::int";
 	}
 
-	return $table_name_short.".".$col_name."::int AS ".$col_name;
+	return $table_name_short.".".$col_name."::int AS ".$col_alias;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__flag_list2var($table_name_short, $col_name, $flag_make_col_alias = true)
+function libsql__flag_list2var($table_name_short, $col_name, $col_alias = null, $flag_make_col_alias = true)
 {
+// stupid compatible
+//("table_name_short", "col_name")
+//("table_name_short", "col_name", true)
+//("table_name_short", "col_name", "col_alias")
+//("table_name_short", "col_name", "col_alias", true)
+	for (;;)
+	{
+		if (gettype($col_alias) === "boolean")
+		{
+			$flag_make_col_alias = $col_alias;
+			$col_alias = $col_name;
+			break;
+		}
+
+		if ($col_alias === null)
+		{
+			$col_alias = $col_name;
+			break;
+		}
+
+		break;
+	}
+
 	if ($flag_make_col_alias === false)
 	{
 		return "FLAG_LIST2JSON(".$table_name_short.".".$col_name.")::json";
 	}
 
-	return "FLAG_LIST2JSON(".$table_name_short.".".$col_name.")::json AS ".$col_name;
+	return "FLAG_LIST2JSON(".$table_name_short.".".$col_name.")::json AS ".$col_alias;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__json2var($table_name_short, $col_name, $flag_make_col_alias = true)
+function libsql__json2var($table_name_short, $col_name, $col_alias = null, $flag_make_col_alias = true)
 {
+// stupid compatible
+//("table_name_short", "col_name")
+//("table_name_short", "col_name", true)
+//("table_name_short", "col_name", "col_alias")
+//("table_name_short", "col_name", "col_alias", true)
+	for (;;)
+	{
+		if (gettype($col_alias) === "boolean")
+		{
+			$flag_make_col_alias = $col_alias;
+			$col_alias = $col_name;
+			break;
+		}
+
+		if ($col_alias === null)
+		{
+			$col_alias = $col_name;
+			break;
+		}
+
+		break;
+	}
+
 	if ($flag_make_col_alias === false)
 	{
 		return $table_name_short.".".$col_name;
 	}
 
-	return $table_name_short.".".$col_name."::json AS ".$col_name;
+	return $table_name_short.".".$col_name."::json AS ".$col_alias;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__json_list2var($table_name_short, $col_name, $flag_make_col_alias = true)
+function libsql__json_list2var($table_name_short, $col_name, $col_alias = null, $flag_make_col_alias = true)
 {
+// stupid compatible
+//("table_name_short", "col_name")
+//("table_name_short", "col_name", true)
+//("table_name_short", "col_name", "col_alias")
+//("table_name_short", "col_name", "col_alias", true)
+	for (;;)
+	{
+		if (gettype($col_alias) === "boolean")
+		{
+			$flag_make_col_alias = $col_alias;
+			$col_alias = $col_name;
+			break;
+		}
+
+		if ($col_alias === null)
+		{
+			$col_alias = $col_name;
+			break;
+		}
+
+		break;
+	}
+
 	if ($flag_make_col_alias === false)
 	{
 		return "TO_JSON(".$table_name_short.".".$col_name.")::json";
 	}
 
-	return "TO_JSON(".$table_name_short.".".$col_name.")::json AS ".$col_name;
+	return "TO_JSON(".$table_name_short.".".$col_name.")::json AS ".$col_alias;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__text2var($table_name_short, $col_name, $flag_make_col_alias = true)
+function libsql__text2var($table_name_short, $col_name, $col_alias = null, $flag_make_col_alias = true)
 {
+// stupid compatible
+//("table_name_short", "col_name")
+//("table_name_short", "col_name", true)
+//("table_name_short", "col_name", "col_alias")
+//("table_name_short", "col_name", "col_alias", true)
+	for (;;)
+	{
+		if (gettype($col_alias) === "boolean")
+		{
+			$flag_make_col_alias = $col_alias;
+			$col_alias = $col_name;
+			break;
+		}
+
+		if ($col_alias === null)
+		{
+			$col_alias = $col_name;
+			break;
+		}
+
+		break;
+	}
+
 	if ($flag_make_col_alias === false)
 	{
 		return $table_name_short.".".$col_name;
 	}
 
-	return $table_name_short.".".$col_name."::text AS ".$col_name;
+	return $table_name_short.".".$col_name."::text AS ".$col_alias;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__text_list2var($table_name_short, $col_name, $flag_make_col_alias = true)
+function libsql__text_list2var($table_name_short, $col_name, $col_alias = null, $flag_make_col_alias = true)
 {
+// stupid compatible
+//("table_name_short", "col_name")
+//("table_name_short", "col_name", true)
+//("table_name_short", "col_name", "col_alias")
+//("table_name_short", "col_name", "col_alias", true)
+	for (;;)
+	{
+		if (gettype($col_alias) === "boolean")
+		{
+			$flag_make_col_alias = $col_alias;
+			$col_alias = $col_name;
+			break;
+		}
+
+		if ($col_alias === null)
+		{
+			$col_alias = $col_name;
+			break;
+		}
+
+		break;
+	}
+
 	if ($flag_make_col_alias === false)
 	{
 		return "TO_JSON(".$table_name_short.".".$col_name.")::json";
 	}
 
-	return "TO_JSON(".$table_name_short.".".$col_name.")::json AS ".$col_name;
+	return "TO_JSON(".$table_name_short.".".$col_name.")::json AS ".$col_alias;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__time2var($table_name_short, $col_name, $flag_make_col_alias = true)
+function libsql__time2var($table_name_short, $col_name, $col_alias = null, $flag_make_col_alias = true)
 {
+// stupid compatible
+//("table_name_short", "col_name")
+//("table_name_short", "col_name", true)
+//("table_name_short", "col_name", "col_alias")
+//("table_name_short", "col_name", "col_alias", true)
+	for (;;)
+	{
+		if (gettype($col_alias) === "boolean")
+		{
+			$flag_make_col_alias = $col_alias;
+			$col_alias = $col_name;
+			break;
+		}
+
+		if ($col_alias === null)
+		{
+			$col_alias = $col_name;
+			break;
+		}
+
+		break;
+	}
+
 	if ($flag_make_col_alias === false)
 	{
 		return "UTC_TO_UNIXMICROTIME(".$table_name_short.".".$col_name.")";
 	}
 
-	return "UTC_TO_UNIXMICROTIME(".$table_name_short.".".$col_name.")::bigint AS ".$col_name;
+	return "UTC_TO_UNIXMICROTIME(".$table_name_short.".".$col_name.")::bigint AS ".$col_alias;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__time_list2var($table_name_short, $col_name, $flag_make_col_alias = true)
+function libsql__time_list2var($table_name_short, $col_name, $col_alias = null, $flag_make_col_alias = true)
 {
+// stupid compatible
+//("table_name_short", "col_name")
+//("table_name_short", "col_name", true)
+//("table_name_short", "col_name", "col_alias")
+//("table_name_short", "col_name", "col_alias", true)
+	for (;;)
+	{
+		if (gettype($col_alias) === "boolean")
+		{
+			$flag_make_col_alias = $col_alias;
+			$col_alias = $col_name;
+			break;
+		}
+
+		if ($col_alias === null)
+		{
+			$col_alias = $col_name;
+			break;
+		}
+
+		break;
+	}
+
 	if ($flag_make_col_alias === false)
 	{
 		return "TIMESTAMP_LIST2JSON(".$table_name_short.".".$col_name.")::json";
 	}
 
-	return "TIMESTAMP_LIST2JSON(".$table_name_short.".".$col_name.")::json AS ".$col_name;
+	return "TIMESTAMP_LIST2JSON(".$table_name_short.".".$col_name.")::json AS ".$col_alias;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__uuid2var($table_name_short, $col_name, $flag_make_col_alias = true)
+function libsql__uuid2var($table_name_short, $col_name, $col_alias = null, $flag_make_col_alias = true)
 {
+// stupid compatible
+//("table_name_short", "col_name")
+//("table_name_short", "col_name", true)
+//("table_name_short", "col_name", "col_alias")
+//("table_name_short", "col_name", "col_alias", true)
+	for (;;)
+	{
+		if (gettype($col_alias) === "boolean")
+		{
+			$flag_make_col_alias = $col_alias;
+			$col_alias = $col_name;
+			break;
+		}
+
+		if ($col_alias === null)
+		{
+			$col_alias = $col_name;
+			break;
+		}
+
+		break;
+	}
+
 	if ($flag_make_col_alias === false)
 	{
 		return $table_name_short.".".$col_name;
 	}
 
-	return $table_name_short.".".$col_name."::text AS ".$col_name;
+	return $table_name_short.".".$col_name."::text AS ".$col_alias;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__uuid_list2var($table_name_short, $col_name, $flag_make_col_alias = true)
+function libsql__uuid_list2var($table_name_short, $col_name, $col_alias = null, $flag_make_col_alias = true)
 {
+// stupid compatible
+//("table_name_short", "col_name")
+//("table_name_short", "col_name", true)
+//("table_name_short", "col_name", "col_alias")
+//("table_name_short", "col_name", "col_alias", true)
+	for (;;)
+	{
+		if (gettype($col_alias) === "boolean")
+		{
+			$flag_make_col_alias = $col_alias;
+			$col_alias = $col_name;
+			break;
+		}
+
+		if ($col_alias === null)
+		{
+			$col_alias = $col_name;
+			break;
+		}
+
+		break;
+	}
+
 	if ($flag_make_col_alias === false)
 	{
 		return "TO_JSON(".$table_name_short.".".$col_name.")::json";
 	}
 
-	return "TO_JSON(".$table_name_short.".".$col_name.")::json AS ".$col_name;
+	return "TO_JSON(".$table_name_short.".".$col_name.")::json AS ".$col_alias;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__uuidx2var($table_name_short, $col_name, $flag_make_col_alias = true)
+function libsql__uuidx2var($table_name_short, $col_name, $col_alias = null, $flag_make_col_alias = true)
 {
+// stupid compatible
+//("table_name_short", "col_name")
+//("table_name_short", "col_name", true)
+//("table_name_short", "col_name", "col_alias")
+//("table_name_short", "col_name", "col_alias", true)
+	for (;;)
+	{
+		if (gettype($col_alias) === "boolean")
+		{
+			$flag_make_col_alias = $col_alias;
+			$col_alias = $col_name;
+			break;
+		}
+
+		if ($col_alias === null)
+		{
+			$col_alias = $col_name;
+			break;
+		}
+
+		break;
+	}
+
 	if ($flag_make_col_alias === false)
 	{
 		return "REPLACE(".$table_name_short.".".$col_name."::text, '-', '')::text";
 	}
 
-	return "REPLACE(".$table_name_short.".".$col_name."::text, '-', '')::text AS ".$col_name;
+	return "REPLACE(".$table_name_short.".".$col_name."::text, '-', '')::text AS ".$col_alias;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__uuidx_list2var($table_name_short, $col_name, $flag_make_col_alias = true)
+function libsql__uuidx_list2var($table_name_short, $col_name, $col_alias = null, $flag_make_col_alias = true)
 {
+// stupid compatible
+//("table_name_short", "col_name")
+//("table_name_short", "col_name", true)
+//("table_name_short", "col_name", "col_alias")
+//("table_name_short", "col_name", "col_alias", true)
+	for (;;)
+	{
+		if (gettype($col_alias) === "boolean")
+		{
+			$flag_make_col_alias = $col_alias;
+			$col_alias = $col_name;
+			break;
+		}
+
+		if ($col_alias === null)
+		{
+			$col_alias = $col_name;
+			break;
+		}
+
+		break;
+	}
+
 	if ($flag_make_col_alias === false)
 	{
 		return "UUID_LIST2JSON(".$table_name_short.".".$col_name.")::json";
 	}
 
-	return "UUID_LIST2JSON(".$table_name_short.".".$col_name.")::json AS ".$col_name;
+	return "UUID_LIST2JSON(".$table_name_short.".".$col_name.")::json AS ".$col_alias;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
