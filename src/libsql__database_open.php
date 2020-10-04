@@ -1,11 +1,20 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-function libsql__database_open($host, $port, $database, $login, $password)
+function libsql__database_open($host, $port, $database, $login, $password, $flag_persistent = false)
 {
 	$result = new result_t(__FUNCTION__, __FILE__);
 
 
 	$connection_string = "host=".$host." port=".$port." dbname=".$database." user=".$login." password=".$password;
-	$sql_handle = @pg_connect($connection_string, PGSQL_CONNECT_FORCE_NEW);
+
+
+	if ($flag_persistent === false)
+	{
+		$sql_handle = @pg_connect($connection_string, PGSQL_CONNECT_FORCE_NEW);
+	}
+	else
+	{
+		$sql_handle = @pg_pconnect($connection_string);
+	}
 	if ($sql_handle === false)
 	{
 		$result->set_err(1, "SQL сервер недоступен");
