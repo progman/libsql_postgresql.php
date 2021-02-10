@@ -33,7 +33,7 @@ CREATE OR REPLACE FUNCTION TIMESTAMP_TO_UNIXTIME(TIMESTAMP)
 RETURNS BIGINT
 LANGUAGE SQL
 IMMUTABLE STRICT
-AS 'SELECT EXTRACT(EPOCH FROM $1)::bigint;';
+AS 'SELECT FLOOR(EXTRACT(EPOCH FROM $1))::bigint;';
 
 ALTER FUNCTION public.TIMESTAMP_TO_UNIXTIME(TIMESTAMP) OWNER TO postgres;
 -- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
@@ -43,7 +43,7 @@ CREATE OR REPLACE FUNCTION TIMESTAMPTZ_TO_UNIXTIME(TIMESTAMPTZ)
 RETURNS BIGINT
 LANGUAGE SQL
 IMMUTABLE STRICT
-AS 'SELECT EXTRACT(EPOCH FROM $1)::bigint;';
+AS 'SELECT FLOOR(EXTRACT(EPOCH FROM $1))::bigint;';
 
 ALTER FUNCTION public.TIMESTAMPTZ_TO_UNIXTIME(TIMESTAMPTZ) OWNER TO postgres;
 -- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
@@ -53,7 +53,7 @@ CREATE OR REPLACE FUNCTION TIMESTAMPTZ_TO_UNIXTIME(TIMESTAMP)
 RETURNS BIGINT
 LANGUAGE SQL
 IMMUTABLE STRICT
-AS 'SELECT EXTRACT(EPOCH FROM $1::timestamptz)::bigint;';
+AS 'SELECT FLOOR(EXTRACT(EPOCH FROM $1::timestamptz))::bigint;';
 
 ALTER FUNCTION public.TIMESTAMPTZ_TO_UNIXTIME(TIMESTAMP) OWNER TO postgres;
 -- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
@@ -63,7 +63,7 @@ CREATE OR REPLACE FUNCTION INTERVAL_TO_UNIXTIME(INTERVAL)
 RETURNS BIGINT
 LANGUAGE SQL
 IMMUTABLE STRICT
-AS 'SELECT EXTRACT(EPOCH FROM $1)::bigint;';
+AS 'SELECT FLOOR(EXTRACT(EPOCH FROM $1))::bigint;';
 
 ALTER FUNCTION public.INTERVAL_TO_UNIXTIME(INTERVAL) OWNER TO postgres;
 -- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
@@ -73,7 +73,7 @@ CREATE OR REPLACE FUNCTION UNIXTIME_TO_TIMESTAMP(INTEGER)
 RETURNS TIMESTAMP
 LANGUAGE SQL
 IMMUTABLE STRICT
-AS 'SELECT $1::abstime::timestamp AS result';
+AS $_$SELECT to_timestamp($1) AT TIME ZONE 'UTC'$_$;
 
 ALTER FUNCTION public.UNIXTIME_TO_TIMESTAMP(INTEGER) OWNER TO postgres;
 -- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
@@ -83,7 +83,7 @@ CREATE OR REPLACE FUNCTION UNIXTIME_TO_TIMESTAMPTZ(INTEGER)
 RETURNS TIMESTAMPTZ
 LANGUAGE SQL
 IMMUTABLE STRICT
-AS 'SELECT $1::abstime::timestamptz AS result';
+AS $_$SELECT (to_timestamp($1) AT TIME ZONE 'UTC')::timestamptz$_$;
 
 ALTER FUNCTION public.UNIXTIME_TO_TIMESTAMPTZ(INTEGER) OWNER TO postgres;
 -- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --
