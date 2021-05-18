@@ -1,5 +1,21 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-// 0.4.3
-// Alexey Potehin <gnuplanet@gmail.com>, http://www.gnuplanet.ru/doc/cv
+function libsql__notify($sql_handle, $channel, $payload)
+{
+	$result = new result_t(__FUNCTION__, __FILE__);
+
+
+	$sql_tag = "SQL006";
+	$sql_str = "SELECT pg_notify(".libsql__var2text($channel).", ".libsql__var2text($payload)."); -- ".$sql_tag;
+	$sql_result = libsql__query($sql_handle, $sql_tag, $sql_str, $result);
+	if ($sql_result === false)
+	{
+		$result->set_err(1, "sql error", libsql__error($sql_handle));
+		return $result;
+	}
+	libsql__query_free($sql_result);
+
+
+	$result->set_ok();
+	return $result;
+}
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-// PLEASE DO NOT EDIT !!! THIS FILE IS GENERATED FROM FILES FROM DIR src BY make.sh
